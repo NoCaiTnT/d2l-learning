@@ -73,8 +73,12 @@ class PositionalEncoding(nn.Module):
         self.P[:, :, 1::2] = torch.cos(X)
 
     def forward(self, X):
-        X = X + self.P[:, :X.shape[1], :].to(X.device)
+        X = X + self.P[:, :X.shape[1], :].to(X.device)      # 为什么是相加而不是拼接?
         return self.dropout(X)
+#   原因:
+#       1. 拼接位置编码后会使得随后的网络层(如自注意力层)的参数量和计算量成倍增加
+#       2. 使得模型的结构更加简洁和一致, 避免了由于维度变化带来的复杂性
+#       3. 相加允许位置信息和输入信息在同一个向量空间内进行融合, 使得模型能够在处理输入时直接考虑到位置信息
 
 # 行代表标记在序列中的位置, 列代表位置编码的不同维度
 encoding_dim, num_steps = 32, 60
