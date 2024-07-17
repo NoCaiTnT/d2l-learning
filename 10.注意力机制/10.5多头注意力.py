@@ -3,6 +3,12 @@ import torch
 from torch import nn
 from d2l import torch as d2l
 
+# 从输入x变成query, key, value的过程中, 之前是只使用一个W_q, W_k, W_v, 得到1个query, key, value
+# 而多头则对x同时使用多个W_q_j, W_k_j, W_v_j, 得到多个query, key, value, 然后将这些query, key, value进行拼接
+# 在计算时, 相同j的query, key, value才会被计算, 不同j的query, key, value则分别结算
+# 因此可以得到j个输出, 然后将这些输出拼接起来, 然后将维度变回原来的维度, 乘以一个W_o, 得到最终的输出
+# 不同的j可以理解为不同的注意力头, 每个注意力头可以关注不同的地方
+
 # 选择缩放点积注意力作为每一个注意力头
 #@save
 class MultiHeadAttention(nn.Module):
