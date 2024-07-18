@@ -4,6 +4,9 @@ import torch
 from d2l import torch as d2l
 import pandas as pd
 
+# 加载数据报错
+#   参考: https://discuss.d2l.ai/t/wikitext-2-v1/22813
+
 #@save
 d2l.DATA_HUB['wikitext-2'] = (
     'https://s3.amazonaws.com/research.metamind.io/wikitext/'
