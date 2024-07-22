@@ -17,9 +17,9 @@
 #                                  ↑
 # n × Recurrent Layer   →     Recurrent Layer × n
 #          ↑                       ↑
-#      Embedding        →       Embedding
+#      Embedding                Embedding
 #          ↑                       ↑
-#       Sources         →        Targets(训练时课件, 推理时只输入<bos>)
+#       Sources                  Targets(训练时课件, 推理时只输入<bos>)
 
 # 训练
 #   训练时解码器使用目标句子作为输入
